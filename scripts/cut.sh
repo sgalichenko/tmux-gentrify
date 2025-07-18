@@ -6,6 +6,6 @@ if [[ -z "$stack" ]]; then
 else
   new_stack="$pane_id,$stack"
 fi
-tmux select-pane -t "$pane_id" -P "bg=yellow"
 tmux set -g @gentrify_pane_stack "$new_stack"
-tmux break-pane -d -s "$pane_id"
+temp_window=$(tmux break-pane -d -s "$pane_id" -P -F "#{window_id}")
+tmux rename-window -t "$temp_window" "tmp"
